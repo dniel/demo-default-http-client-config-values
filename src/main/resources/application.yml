@@ -1,6 +1,15 @@
 micronaut:
     application:
         name: demo
-    openapi:
-        target:
-            file: ./generated-docs/demo-doc.yml
+
+    http:
+      client:
+        pool:
+          max-concurrent-requests-per-http2-connection: 321
+          max-concurrent-http2-connections: 66
+
+      services:
+        httpbin:
+          url: https://httpbin.org
+          pool:
+            max-concurrent-http2-connections: 1

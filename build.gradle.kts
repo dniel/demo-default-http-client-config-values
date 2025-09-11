@@ -10,7 +10,7 @@ version = "0.1"
 group = "com.example"
 
 val micronautVersion: String by project
-val jvmVersion = "21" // 17 does not work, 19+ works
+val jvmVersion = "23" // 17 does not work, 19+ works
 
 tasks.register("logJavaVersion") {
     doLast {
@@ -26,18 +26,25 @@ repositories {
 
 dependencies {
     compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
 
     // Parsing av yml
     runtimeOnly("org.yaml:snakeyaml")
 }
 
-// This causes it not to work
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(jvmVersion))
+        languageVersion.set(JavaLanguageVersion.of(23))
     }
 }
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(21) // makes sure Java compilation targets the same
+}
 
+kotlin {
+    jvmToolchain(21)
+}
 application {
     mainClass = "com.example.ApplicationKt"
 }

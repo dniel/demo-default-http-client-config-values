@@ -8,22 +8,22 @@ import jakarta.inject.Singleton
 import org.slf4j.LoggerFactory
 
 @Singleton
-class HttpClientBeanCreatorListener(
+class HttpBinClientCreatedEventListener(
     @Named("httpbin") private val cfg: HttpClientConfiguration,
-) : BeanCreatedEventListener<HttpClientClient> {
+) : BeanCreatedEventListener<HttpBinClient> {
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    override fun onCreated(event: BeanCreatedEvent<HttpClientClient>): HttpClientClient {
+    override fun onCreated(event: BeanCreatedEvent<HttpBinClient>): HttpBinClient {
         val bean = event.bean
 
-        log.error("###OpPointClientListener###Bean of type OperationalPointClient has been created!")
-        log.error("###Config for 'operational-point':")
-        log.error("###  connectTimeout = ${cfg.connectTimeout}")
-        log.error("###  readTimeout = ${cfg.readTimeout}")
-        log.error("###  pool config isEnabled  = ${cfg.connectionPoolConfiguration.isEnabled}")
-        log.error("###  pool config 1  = ${cfg.connectionPoolConfiguration.maxConcurrentHttp2Connections}")
-        log.error("###  pool config 2  = ${cfg.connectionPoolConfiguration.maxConcurrentRequestsPerHttp2Connection}")
-        log.error("###  pool config 3  = ${cfg.connectionPoolConfiguration.connectionLocality}")
+        log.info("###HttpBinClientCreatedEventListener###Bean of type HttpBinClient has been created!")
+        log.info("###Config for 'HttpBinClient':")
+        log.info("###  connectTimeout = ${cfg.connectTimeout}")
+        log.info("###  readTimeout = ${cfg.readTimeout}")
+        log.info("###  pool config isEnabled  = ${cfg.connectionPoolConfiguration.isEnabled}")
+        log.info("###  pool config maxConcurrentHttp2Connections  = ${cfg.connectionPoolConfiguration.maxConcurrentHttp2Connections}")
+        log.info("###  pool config maxConcurrentRequestsPerHttp2Connection  = ${cfg.connectionPoolConfiguration.maxConcurrentRequestsPerHttp2Connection}")
+        log.info("###  pool config connectionLocality  = ${cfg.connectionPoolConfiguration.connectionLocality}")
 
         return bean
     }
