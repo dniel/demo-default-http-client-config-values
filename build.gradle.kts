@@ -12,6 +12,14 @@ group = "com.example"
 val micronautVersion: String by project
 val jvmVersion = "21" // 17 does not work, 19+ works
 
+tasks.register("logJavaVersion") {
+    doLast {
+        println("Gradle is running on Java version: ${JavaVersion.current()}")
+        println("Java vendor: ${System.getProperty("java.vendor")}")
+        println("Java home: ${System.getProperty("java.home")}")
+    }
+}
+
 repositories {
     mavenCentral()
 }
