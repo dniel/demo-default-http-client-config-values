@@ -8,9 +8,9 @@ See the `application.yml` file for the configuration.
 The global http client is configured with max-concurrent-requests-per-http2-connection: 321
 The httpbin client does not have a configuration for this property. 
 I have created a custom bean creation event listener that logs the configuration of the 
-httpbin client when it's created. I expected the output logged to contain the 321 value 
+httpbin client when it's created. I expected the output logged to contain the *321* value 
 for this property (inherited from global http client), but it does not, instead it contains 
-the default value of 2147483647. 
+the default value of *2147483647*. 
 
 ## The output of the application is:
 
